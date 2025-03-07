@@ -50,8 +50,8 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('sonarserver') {
-                    sh '''${scannerhome}/bin/sonar-scanner -Dsonar.projectKey=devops \
-                       -Dsonar.projectName=devops \
+                    sh '''${scannerhome}/bin/sonar-scanner -Dsonar.projectKey=DevOps \
+                       -Dsonar.projectName=DevOps \
                        -Dsonar.projectVersion=1.0 \
                        -Dsonar.sources=src/ \
                        -Dsonar.java.binaries=target/test-classes/devops_v2/ \
