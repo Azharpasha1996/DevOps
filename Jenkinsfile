@@ -99,6 +99,12 @@ pipeline {
             }
         }
 
+        stage('Remove Container Images') {
+            steps{
+                sh 'docker rmi -f $(docker images -a -q)'
+            }
+        }              
+
     }
 
 }
