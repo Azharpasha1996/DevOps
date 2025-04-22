@@ -72,5 +72,17 @@ sudo usermod -aG docker ubuntu
 ```
 docker run -d --name sonar -p 9000:9000 sonarqube:latest
 ```
-# 5. Install the below plugins in jenkins server
+# 5. Install and configure plugins on jenkins
+* SonarQube Scanner
+* Config file provider
+* Maven Integration
+* Pipeline maven Integration
+* Kubernetes
+* Kubernetes Client API
+* Kubernetes credentials
+* kubernetes CLI
+* Docker
+* Docker pipeline
+* Pipeline Stage view
+* Eclipse Temurin installer
 
