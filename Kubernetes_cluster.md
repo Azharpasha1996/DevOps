@@ -34,4 +34,88 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.29.3/manifests/ca
 ```
 ```
 kubectl apply -f calico.yaml
-``` 
+```
+
+# 4. For continous delpoyment to in the jenkins server.
+* Create service Account
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins
+  namespace: webapps
+```
+* Create Role
+```
+apiVersion: rbac.authorization.k9s.io/v1
+kind: Role
+metadata:
+  name: app-role
+  namespace: webapps
+rules:
+  - apiGroups:
+        - ""
+        - apps
+        - autoscaling
+        - batch
+        - extensions
+        - policy
+        - rbac.authorization.k8s.io
+    resources:
+        - pods
+        - componentstatuses
+        - configmaps
+        - daemonsets
+        - deployments
+        - events
+        - endpoints
+        - horizontalpodautoscalers
+        - ingress
+        - jobs
+        - limitranges
+        - namespaces
+        - nodes
+        - pods
+        - persistentvolumes
+        - persistentvolumeclaims
+        - resourceqoutas
+        - replicasets
+        - replicationcontrollers
+        - serviceaccounts
+        - services
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+```
+* Create Bind
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-rolebinding
+  namespace: webapps
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: app-role
+subjects:
+  - namespace: webapps
+    kind: ServiceAccount
+    name: jenkins
+```
+* Create secret
+```
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: mysec
+  annotations:
+    kubernetes.io/service-account.name: jenkins
+```
+* To create secret run the below command
+```
+kubectl apply -f sec.yaml -n webapps
+```
+# 5. To integrate the k8s cluster in jenkins pipeline
+```
+kubectl describe secret <secret-name> -n webapps
+```
