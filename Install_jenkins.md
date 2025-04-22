@@ -1,4 +1,4 @@
-###1. Copy the below code to install jenkins on the Ubuntu ec2
+# 1. Copy the below code to install jenkins on the Ubuntu ec2
 ```
 #!/bin/bash
 # Install openjdk 21 JRE
@@ -23,7 +23,7 @@ sudo apt-get install jenkins -y
 
 
 
-###2. Copy the below script to install docker on both jenkins and Sonarqube server
+# 2. Copy the below script to install docker on both jenkins and Sonarqube server
 
 ```
 #!/bin/bash
@@ -59,7 +59,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 
 
-###3. Add the user jenkins to the docker group
+# 3. Add the user jenkins to the docker group
 ```
 sudo usermod -aG docker jenkins
 ```
@@ -67,10 +67,10 @@ sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
 ```
 
-###4. Run the command on the sonarqube server to run a docker container of sonarqube server
+# 4. Run the command on the sonarqube server to run a docker container of sonarqube server
 
 ```
 docker run -d --name sonar -p 9000:9000 sonarqube:latest
 ```
-###5. Install the below plugins in jenkins server
+# 5. Install the below plugins in jenkins server
 
