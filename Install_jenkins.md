@@ -1,5 +1,5 @@
 1. Copy the below code to install jenkins on the Ubuntu ec2
-'''
+""" sh
 #!/bin/bash
 # Install openjdk 21 JRE
 sudo apt update -y
@@ -20,7 +20,7 @@ sudo apt-get update -y
 # Install jenkins
 sudo apt-get install jenkins -y
 
-'''
+"""
 
 2. Copy the below script to install docker on both jenkins and Sonarqube server
 
