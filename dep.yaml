@@ -27,11 +27,37 @@ kind: Service
 metadata:
   name: devops-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: devops
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: webapps
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+spec:
+  ingressClassName: alb
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: devops-service
+            port:
+              number: 8080
+
 
 
