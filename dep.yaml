@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: devops-container
-        image: azharpasha01/devops:latest
+        image: azharpasha/devops01:latest
         ports:
         - containerPort: 8080
 
